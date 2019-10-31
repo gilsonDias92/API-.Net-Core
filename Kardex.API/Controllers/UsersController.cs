@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Kardex.API.Models;
+using Kardex.API.Validators;
 
 namespace Kardex.API.Controllers
 {
@@ -86,9 +87,12 @@ namespace Kardex.API.Controllers
         public async Task<IActionResult> PostUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
+
+           var _validator = new UserValidator(_context, user);
+
+            if (!_validator.UserExists())
+                return BadRequest(new { errors = "Erro! Esse e-mail já foi cadastrado." });
 
             _context.User.Add(user);
             await _context.SaveChangesAsync();
