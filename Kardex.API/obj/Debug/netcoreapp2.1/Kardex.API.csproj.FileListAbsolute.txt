@@ -12,3 +12,17 @@ C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex.API\obj\Debug\netcoreapp2.1\Ka
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.dll
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.pdb
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.csprojAssemblyReference.cache
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.deps.json
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.runtimeconfig.json
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.runtimeconfig.dev.json
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.dll
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.pdb
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.csprojAssemblyReference.cache
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.csproj.CoreCompileInputs.cache
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.RazorAssemblyInfo.cache
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.RazorAssemblyInfo.cs
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.AssemblyInfoInputs.cache
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.AssemblyInfo.cs
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.RazorTargetAssemblyInfo.cache
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.dll
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.pdb

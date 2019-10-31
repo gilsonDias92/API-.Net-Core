@@ -62,10 +62,6 @@ namespace Kardex.API.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("GitHubLink");
-
-                    b.Property<string>("Image");
-
                     b.Property<string>("Name")
                         .HasMaxLength(50);
 

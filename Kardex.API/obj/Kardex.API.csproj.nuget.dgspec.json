@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex.API\\Kardex.API.csproj": {}
+    "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex API\\Kardex.API\\Kardex.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex.API\\Kardex.API.csproj": {
+    "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex API\\Kardex.API\\Kardex.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex.API\\Kardex.API.csproj",
+        "projectUniqueName": "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex API\\Kardex.API\\Kardex.API.csproj",
         "projectName": "Kardex.API",
-        "projectPath": "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex.API\\Kardex.API.csproj",
+        "projectPath": "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex API\\Kardex.API\\Kardex.API.csproj",
         "packagesPath": "C:\\Users\\gilsi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex.API\\obj\\",
+        "outputPath": "C:\\Users\\gilsi\\Desktop\\TCC-2019\\API KARDEX\\Kardex API\\Kardex.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",
               "target": "Package",
