@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Kardex.API.Models;
 using Kardex.API.Validators;
+using AutoMapper;
+using Kardex.API.DataTransferObjects;
 
 namespace Kardex.API.Controllers
 {
@@ -15,53 +17,50 @@ namespace Kardex.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly KardexContext _context;
+        private readonly IMapper _mapper;
 
-        public UsersController(KardexContext context)
+        public UsersController(KardexContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<User> GetUser()
+        public IActionResult GetUser()
         {
-            return _context.User;
+            return Ok(_context.User.ToList()
+                .Select(_mapper.Map<User, UserDTO>));
         }
 
-        // GET: api/Users/5
+        // GET: api/Users/id
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser([FromRoute] int id)
+        public async Task<IActionResult> GetUser(int id)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             var user = await _context.User.FindAsync(id);
 
             if (user == null)
-            {
-                return NotFound();
-            }
+                return BadRequest(error: "Erro! Usuário não encontrado.");
 
-            return Ok(user);
+            return  Ok(_mapper.Map<UserDTO>(user));
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser([FromRoute] int id, [FromBody] User user)
+        public async Task<IActionResult> PutUser(int id, UserDTO userDTO)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+            var userInDb = _context.User.SingleOrDefault(u => u.Id == id);
 
-            _context.Entry(user).State = EntityState.Modified;
+            if (userInDb == null)
+                return NotFound();
+
+            _mapper.Map(userDTO, userInDb);
 
             try
             {
@@ -70,55 +69,51 @@ namespace Kardex.API.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!UserExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Users
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody] User user)
+        public async Task<IActionResult> PostUser(UserDTO userDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-           var _validator = new UserValidator(_context, user);
+            var user = _mapper.Map<UserDTO, User>(userDTO);
+            var _validator = new UserValidator(_context, user);
 
             if (!_validator.UserExists())
-                return BadRequest(new { errors = "Erro! Esse e-mail já foi cadastrado." });
+                return BadRequest(new { errors = "Erro! Esse e-mail já está cadastrado em nosso sistema." });
 
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
+            userDTO.Id = user.Id;
+
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Users/id
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
-            {
+            var userInDb = await _context.User.FindAsync(id);
+
+            if (userInDb == null)
                 return NotFound();
-            }
 
-            _context.User.Remove(user);
+            _context.User.Remove(userInDb);
             await _context.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok();
         }
 
         private bool UserExists(int id)

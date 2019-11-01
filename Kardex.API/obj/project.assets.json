@@ -2,56 +2,29 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "AutoMapper/9.0.0": {
+      "AutoMapper/7.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
-          "System.Reflection.Emit": "4.3.0"
+          "System.ValueTuple": "4.5.0"
         },
         "compile": {
-          "lib/netstandard2.0/AutoMapper.dll": {}
+          "lib/netcoreapp2.0/AutoMapper.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/AutoMapper.dll": {}
+          "lib/netcoreapp2.0/AutoMapper.dll": {}
         }
       },
-      "FluentValidation/8.5.0": {
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.ComponentModel.Annotations": "4.4.1"
+          "AutoMapper": "7.0.1",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/FluentValidation.dll": {}
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/FluentValidation.dll": {}
-        }
-      },
-      "FluentValidation.AspNetCore/8.5.0": {
-        "type": "package",
-        "dependencies": {
-          "FluentValidation": "8.5.0",
-          "FluentValidation.DependencyInjectionExtensions": "8.5.0",
-          "Microsoft.AspNetCore.Mvc": "2.1.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/FluentValidation.AspNetCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/FluentValidation.AspNetCore.dll": {}
-        }
-      },
-      "FluentValidation.DependencyInjectionExtensions/8.5.0": {
-        "type": "package",
-        "dependencies": {
-          "FluentValidation": "8.5.0",
-          "Microsoft.Extensions.Dependencyinjection.Abstractions": "2.1.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll": {}
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -4611,18 +4584,13 @@
           "lib/netstandard1.3/System.Threading.Thread.dll": {}
         }
       },
-      "System.ValueTuple/4.3.0": {
+      "System.ValueTuple/4.5.0": {
         "type": "package",
-        "dependencies": {
-          "System.Collections": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
         "compile": {
-          "lib/netstandard1.0/System.ValueTuple.dll": {}
+          "ref/netcoreapp2.0/_._": {}
         },
         "runtime": {
-          "lib/netstandard1.0/System.ValueTuple.dll": {}
+          "lib/netcoreapp2.0/_._": {}
         }
       },
       "System.Xml.ReaderWriter/4.3.0": {
@@ -4766,68 +4734,39 @@
     }
   },
   "libraries": {
-    "AutoMapper/9.0.0": {
-      "sha512": "xCqvoxT4HIrNY/xlXG9W+BA/awdrhWvMTKTK/igkGSRbhOhpl3Q8O8Gxlhzjc9JsYqE7sS6AxgyuUUvZ6R5/Bw==",
+    "AutoMapper/7.0.1": {
+      "sha512": "6xHbhsW09sWjjYuE1sqhYn25PQzB6UEUVPME5uhlaIz2NR2+L3+FGbVxvknJKug1BLp6VTLxDb5RcGXKMm0ieQ==",
       "type": "package",
-      "path": "automapper/9.0.0",
+      "path": "automapper/7.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "automapper.9.0.0.nupkg.sha512",
+        "automapper.7.0.1.nupkg.sha512",
         "automapper.nuspec",
-        "lib/net461/AutoMapper.dll",
-        "lib/net461/AutoMapper.pdb",
-        "lib/net461/AutoMapper.xml",
+        "lib/net45/AutoMapper.dll",
+        "lib/net45/AutoMapper.pdb",
+        "lib/net45/AutoMapper.xml",
+        "lib/netcoreapp2.0/AutoMapper.dll",
+        "lib/netcoreapp2.0/AutoMapper.pdb",
+        "lib/netcoreapp2.0/AutoMapper.xml",
+        "lib/netstandard1.3/AutoMapper.dll",
+        "lib/netstandard1.3/AutoMapper.pdb",
+        "lib/netstandard1.3/AutoMapper.xml",
         "lib/netstandard2.0/AutoMapper.dll",
         "lib/netstandard2.0/AutoMapper.pdb",
         "lib/netstandard2.0/AutoMapper.xml"
       ]
     },
-    "FluentValidation/8.5.0": {
-      "sha512": "gH9TOcn/l4WEG+h17z9sOPUf8rYX2NKBZ4hQjdPQWLeSyGlUiTCVVv6Dmpg2573Wtl2u1y11YmmhUO31gcZkeQ==",
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/4.0.1": {
+      "sha512": "Fhl+XDdcR2ogcqyHIeTB5fGCB58wTXOdpiqDI4sh/durRx8LJw+QJw2ZGLO3DIXTPvvnHM/t0DZy0vf0cdIGEg==",
       "type": "package",
-      "path": "fluentvalidation/8.5.0",
+      "path": "automapper.extensions.microsoft.dependencyinjection/4.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "fluentvalidation.8.5.0.nupkg.sha512",
-        "fluentvalidation.nuspec",
-        "lib/net45/FluentValidation.dll",
-        "lib/net45/FluentValidation.xml",
-        "lib/netstandard1.1/FluentValidation.dll",
-        "lib/netstandard1.1/FluentValidation.xml",
-        "lib/netstandard1.6/FluentValidation.dll",
-        "lib/netstandard1.6/FluentValidation.xml",
-        "lib/netstandard2.0/FluentValidation.dll",
-        "lib/netstandard2.0/FluentValidation.xml"
-      ]
-    },
-    "FluentValidation.AspNetCore/8.5.0": {
-      "sha512": "D0rR/221hH96QS1OJUBs4ZXlFslOOB4qfVOLcPEf09vjsaI8H29oGWWFi4iawVz1Jstam/ap58RJly6qkZWALA==",
-      "type": "package",
-      "path": "fluentvalidation.aspnetcore/8.5.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "fluentvalidation.aspnetcore.8.5.0.nupkg.sha512",
-        "fluentvalidation.aspnetcore.nuspec",
-        "lib/netcoreapp3.0/FluentValidation.AspNetCore.dll",
-        "lib/netcoreapp3.0/FluentValidation.AspNetCore.xml",
-        "lib/netstandard2.0/FluentValidation.AspNetCore.dll",
-        "lib/netstandard2.0/FluentValidation.AspNetCore.xml"
-      ]
-    },
-    "FluentValidation.DependencyInjectionExtensions/8.5.0": {
-      "sha512": "C06aJuXUO15IDWoIXwZlRMNguk19jhyDU5uWUvjhp4692dOTnHSDqwJ9xpeuuo0l0Th+uzdgP5+BXZSRZnR5Gw==",
-      "type": "package",
-      "path": "fluentvalidation.dependencyinjectionextensions/8.5.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "fluentvalidation.dependencyinjectionextensions.8.5.0.nupkg.sha512",
-        "fluentvalidation.dependencyinjectionextensions.nuspec",
-        "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll",
-        "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.xml"
+        "automapper.extensions.microsoft.dependencyinjection.4.0.1.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.nuspec",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -12487,20 +12426,48 @@
         "system.threading.thread.nuspec"
       ]
     },
-    "System.ValueTuple/4.3.0": {
-      "sha512": "cNLEvBX3d6MMQRZe3SMFNukVbitDAEpVZO17qa0/2FHxZ7Y7PpFRpr6m2615XYM/tYYYf0B+WyHNujqIw8Luwg==",
+    "System.ValueTuple/4.5.0": {
+      "sha512": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
       "type": "package",
-      "path": "system.valuetuple/4.3.0",
+      "path": "system.valuetuple/4.5.0",
       "files": [
         ".nupkg.metadata",
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/netstandard1.0/.xml",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.ValueTuple.dll",
+        "lib/net461/System.ValueTuple.xml",
+        "lib/net47/System.ValueTuple.dll",
+        "lib/net47/System.ValueTuple.xml",
+        "lib/netcoreapp2.0/_._",
         "lib/netstandard1.0/System.ValueTuple.dll",
-        "lib/portable-net40+sl4+win8+wp8/.xml",
+        "lib/netstandard1.0/System.ValueTuple.xml",
+        "lib/netstandard2.0/_._",
         "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
-        "system.valuetuple.4.3.0.nupkg.sha512",
-        "system.valuetuple.nuspec"
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.xml",
+        "lib/uap10.0.16299/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.ValueTuple.dll",
+        "ref/net47/System.ValueTuple.dll",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard2.0/_._",
+        "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "ref/uap10.0.16299/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.valuetuple.4.5.0.nupkg.sha512",
+        "system.valuetuple.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Xml.ReaderWriter/4.3.0": {
@@ -12830,8 +12797,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "AutoMapper >= 9.0.0",
-      "FluentValidation.AspNetCore >= 8.5.0",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 4.0.1",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.EntityFrameworkCore.Tools >= 2.1.4",
@@ -12882,13 +12848,9 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
-          "AutoMapper": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
-            "version": "[9.0.0, )"
-          },
-          "FluentValidation.AspNetCore": {
-            "target": "Package",
-            "version": "[8.5.0, )"
+            "version": "[4.0.1, )"
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
