@@ -29,8 +29,10 @@ namespace Kardex.API.Controllers
         [HttpGet]
         public IActionResult GetUser()
         {
-            return Ok(_context.User.ToList()
-                .Select(_mapper.Map<User, UserDTO>));
+            var users = _context.User.ToList()
+                .Select(_mapper.Map<User, UserDTO>);
+
+            return Ok(users);
         }
 
         // GET: api/Users/id

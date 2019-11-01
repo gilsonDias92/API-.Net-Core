@@ -1,4 +1,7 @@
-﻿using Kardex.API.Models;
+﻿using AutoMapper;
+using Kardex.API.DataTransferObjects;
+using Kardex.API.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +12,25 @@ namespace Kardex.API.Services
     public class UserServices
     {
         private readonly KardexContext _context;
+        private readonly IMapper _mapper;
 
-        public UserServices(KardexContext context)
+        public UserServices(KardexContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public IEnumerable<User> GetAll()
+
+        public IEnumerable<UserDTO> GetAll()
         {
-            return _context.User;
+            var users = _context.User.ToList()
+                .Select(_mapper.Map<User, UserDTO>);
+            return users;
         }
 
         public void Delete(int id)
         {
-            
+
         }
 
         public void Edit(User user)

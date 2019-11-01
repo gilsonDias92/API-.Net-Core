@@ -27,6 +27,8 @@ namespace Kardex.API.Models
         public int CardListId { get; set; }
 
         private DateTime? _addedDate = null;
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DateAdded
         {
             get
