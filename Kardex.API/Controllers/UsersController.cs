@@ -9,12 +9,13 @@ using Kardex.API.Models;
 using Kardex.API.Validators;
 using AutoMapper;
 using Kardex.API.DataTransferObjects;
+using Microsoft.AspNetCore.Cors;
 
 namespace Kardex.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : Controller
     {
         private readonly KardexContext _context;
         private readonly IMapper _mapper;
@@ -80,8 +81,9 @@ namespace Kardex.API.Controllers
         }
 
         // POST: api/Users
+        [EnableCors("MyPolicy")]
         [HttpPost]
-        public async Task<IActionResult> PostUser(UserDTO userDTO)
+        public async Task<IActionResult> PostUser([FromBody]UserDTO userDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

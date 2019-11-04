@@ -37,8 +37,14 @@ namespace Kardex.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             var config = new MapperConfiguration(mc =>
             {
@@ -76,7 +82,7 @@ namespace Kardex.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("MyPolicy");
             app.UseMvc();
 
             // Ativando middlewares para uso do Swagger

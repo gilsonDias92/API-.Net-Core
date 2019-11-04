@@ -4,5 +4,10 @@
         <name>Kardex.API</name>
     </assembly>
     <members>
+        <member name="M:Kardex.API.Data.MappingProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>
