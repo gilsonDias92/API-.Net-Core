@@ -9,7 +9,7 @@ namespace Kardex.API.Validators
 {
     public class UserCreateRequestValidator
     {
-        private KardexContext _context;
+        private readonly KardexContext _context;
         private UserCreateRequest _user;
 
         public UserCreateRequestValidator(KardexContext context, UserCreateRequest user)
@@ -20,8 +20,9 @@ namespace Kardex.API.Validators
 
         public bool UserExists()
         {
-            var userExists = _context.User.Where(u => u.Email == _user.Email)
+            var userExists = _context.User.Where(user => user.Email == _user.Email)
                                           .Count();
+
             return (userExists > 0) ? false : true;
         }
     }

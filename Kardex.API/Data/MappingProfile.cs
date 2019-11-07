@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
 using Kardex.API.DataTransferObjects;
 using Kardex.API.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Kardex.API.Data
 {
     public class MappingProfile : Profile
     {
-    /// <summary>
-    /// 
-    /// </summary>
         public MappingProfile()
         {
             CreateMap<User, UserDTO>();

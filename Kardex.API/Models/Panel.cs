@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace Kardex.API.Models
 {
-    // Tela principal onde o usuário poderá criar Panels
-    [Table("Board")]
-    public class Board
+    // Painel de determinado projeto que o usuário cria dentro do board
+    [Table("Panel")]
+    public class Panel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public User User { get; set; }
-        public int UserId { get; set; }
-        public ICollection<Panel> Panels { get; set; }
+        public Board Board { get; set; }
+        public int BoardId { get; set; }
+        public ICollection<Member> Members { get; set; }
+        public ICollection<Produce> Produces { get; set; }
     }
 }
