@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
+using AutoMapper;
 using Kardex.API.Models;
 using Kardex.API.Validators;
-using AutoMapper;
 using Kardex.API.DataTransferObjects;
-using Microsoft.AspNetCore.Cors;
+using Kardex.API.ExtensionMethods.User;
+using Kardex.API.Contracts.Requests.Create;
 
 namespace Kardex.API.Controllers
 {
@@ -83,16 +85,22 @@ namespace Kardex.API.Controllers
         // POST: api/Users
         [EnableCors("MyPolicy")]
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody]UserDTO userDTO)
+        public async Task<IActionResult> PostUser([FromBody]UserCreateRequest userContract)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var user = _mapper.Map<UserDTO, User>(userDTO);
-            var _validator = new UserValidator(_context, user);
 
+
+            var _validator = new UserCreateRequestValidator(_context, userContract);    
             if (!_validator.UserExists())
-                return BadRequest(new { errors = "Erro! Esse e-mail já está cadastrado em nosso sistema." });
+                return BadRequest(new { errors = "Erro! Esse e-mail já foi cadastrado." });
+
+            // Convertendo o contrato para DTO
+            var userDTO = userContract.ConvertContractToUserDTO();
+
+            // Mapeando a DTO para a model
+            var user = _mapper.Map<UserDTO, User>(userDTO);
 
             _context.User.Add(user);
             await _context.SaveChangesAsync();

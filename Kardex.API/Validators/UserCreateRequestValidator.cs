@@ -1,4 +1,5 @@
-﻿using Kardex.API.Models;
+﻿using Kardex.API.Contracts.Requests.Create;
+using Kardex.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Kardex.API.Validators
 {
-    public class UserValidator
+    public class UserCreateRequestValidator
     {
         private KardexContext _context;
-        private User _user;
+        private UserCreateRequest _user;
 
-        public UserValidator(KardexContext context, User user)
+        public UserCreateRequestValidator(KardexContext context, UserCreateRequest user)
         {
             _context = context;
             _user = user;
@@ -21,7 +22,6 @@ namespace Kardex.API.Validators
         {
             var userExists = _context.User.Where(u => u.Email == _user.Email)
                                           .Count();
-
             return (userExists > 0) ? false : true;
         }
     }

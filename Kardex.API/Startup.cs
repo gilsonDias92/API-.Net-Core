@@ -17,6 +17,7 @@ using AutoMapper;
 using Kardex.API.Data;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using Kardex.API.DataTransferObjects;
+using FluentValidation.AspNetCore;
 
 namespace Kardex.API
 {
@@ -38,6 +39,10 @@ namespace Kardex.API
         {
             services.AddMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMvc()
+                .AddFluentValidation(fvc =>
+                            fvc.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
