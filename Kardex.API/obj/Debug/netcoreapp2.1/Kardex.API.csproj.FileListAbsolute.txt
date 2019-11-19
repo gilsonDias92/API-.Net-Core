@@ -17,7 +17,6 @@ C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netco
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.runtimeconfig.dev.json
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.dll
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.pdb
-C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.csprojAssemblyReference.cache
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.csproj.CoreCompileInputs.cache
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.RazorAssemblyInfo.cache
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.RazorAssemblyInfo.cs
@@ -27,3 +26,4 @@ C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netco
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.dll
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.pdb
 C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\bin\Debug\netcoreapp2.1\Kardex.API.xml
+C:\Users\gilsi\Desktop\TCC-2019\API KARDEX\Kardex API\Kardex.API\obj\Debug\netcoreapp2.1\Kardex.API.csprojAssemblyReference.cache

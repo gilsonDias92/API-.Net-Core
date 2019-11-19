@@ -18,6 +18,7 @@ using Kardex.API.Data;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using Kardex.API.DataTransferObjects;
 using FluentValidation.AspNetCore;
+using Newtonsoft.Json;
 
 namespace Kardex.API
 {
@@ -43,6 +44,10 @@ namespace Kardex.API
             services.AddMvc()
                 .AddFluentValidation(fvc =>
                             fvc.RegisterValidatorsFromAssemblyContaining<Startup>());
+
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

@@ -23,8 +23,10 @@ namespace Kardex.API.Models
         public string Lables { get; set; }
         public bool? Visible { get; set; }
         public User User { get; set; }
+        [ForeignKey("User")]
         public int UserId { get; set; }
         public CardList CardList { get; set; }
+        [ForeignKey("Card")]
         public int CardListId { get; set; }
 
         private DateTime? _addedDate = null;

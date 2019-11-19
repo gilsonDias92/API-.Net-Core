@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Kardex.API.DataTransferObjects
 {
-    public class CardListDTO
+    public class ProduceDTO
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public List<CardDTO> Cards { get; set; }
-        public bool Creatable { get; set; }
+        public PanelDTO Panel { get; set; }
+        public int PanelId { get; set; }
+        public ICollection<CardListDTO> Cardlists { get; set; }
     }
 }

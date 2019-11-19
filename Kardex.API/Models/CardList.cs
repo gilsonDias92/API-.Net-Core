@@ -16,7 +16,10 @@ namespace Kardex.API.Models
         public int Id { get; set; }
         [MaxLength(50, ErrorMessage = "Máximo de {1} caracteres permitidos")]
         public string Title { get; set; }
-        public List<Card> Cards { get; set; }
+        public Panel Produce { get; set; }
+        [ForeignKey("Produce")]
+        public int ProduceId { get; set; }
+        public ICollection<Card> Cards { get; set; }
         public bool Creatable { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "1b11378fc1048f44072342f135e1204a6909c0db"
+    "signature": "08da28564edb967b6d25ccbbccff8ca0ba5654b7"
   },
   "compilationOptions": {
     "defines": [
@@ -25,6 +25,7 @@
       "Kardex.API/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "4.0.1",
+          "FluentResults": "1.3.0",
           "FluentValidation.AspNetCore": "8.5.1",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
@@ -68,6 +69,17 @@
         },
         "compile": {
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
+      "FluentResults/1.3.0": {
+        "runtime": {
+          "lib/netstandard2.0/FluentResults.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/FluentResults.dll": {}
         }
       },
       "FluentValidation/8.5.1": {
@@ -3697,6 +3709,13 @@
       "sha512": "sha512-Fhl+XDdcR2ogcqyHIeTB5fGCB58wTXOdpiqDI4sh/durRx8LJw+QJw2ZGLO3DIXTPvvnHM/t0DZy0vf0cdIGEg==",
       "path": "automapper.extensions.microsoft.dependencyinjection/4.0.1",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.4.0.1.nupkg.sha512"
+    },
+    "FluentResults/1.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4iuI3NlkZ3+Jvg7Ffpp4WK3V81Rup3QfAQhI6ECyBvF7BYtGbiOPDttnH058rJHv31JHqQKJPypDtOUOM98Fuw==",
+      "path": "fluentresults/1.3.0",
+      "hashPath": "fluentresults.1.3.0.nupkg.sha512"
     },
     "FluentValidation/8.5.1": {
       "type": "package",

@@ -15,6 +15,7 @@ namespace Kardex.API.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public User User { get; set; }
+        [ForeignKey("User")]
         public int UserId { get; set; }
         public ICollection<Panel> Panels { get; set; }
     }

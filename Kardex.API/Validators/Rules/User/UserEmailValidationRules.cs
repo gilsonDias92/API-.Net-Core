@@ -11,11 +11,12 @@ namespace Kardex.API.Validators.Rules.User
     {
         public UserEmailValidationRules()
         {
+            RuleFor(user => user.Email).NotEmpty().
+                WithMessage("O campo e-mail não pode ser vazio.");
+
             RuleFor(user => user.Email).EmailAddress().
                 WithMessage("Formato de e-mail inválido.");
 
-            RuleFor(user => user.Email).NotEmpty().
-                WithMessage("O campo e-mail não pode ser vazio.");
         }
     }
 }

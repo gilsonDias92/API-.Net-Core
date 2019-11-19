@@ -3,14 +3,16 @@ using System;
 using Kardex.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kardex.API.Migrations
 {
     [DbContext(typeof(KardexContext))]
-    partial class KardexContextModelSnapshot : ModelSnapshot
+    [Migration("20191108000531_secondMigration")]
+    partial class secondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,9 +71,7 @@ namespace Kardex.API.Migrations
 
                     b.Property<bool>("Creatable");
 
-                    b.Property<int>("ProduceId");
-
-                    b.Property<int?>("ProduceId1");
+                    b.Property<int?>("ProduceId");
 
                     b.Property<string>("Title")
                         .HasMaxLength(50);
@@ -79,8 +79,6 @@ namespace Kardex.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProduceId");
-
-                    b.HasIndex("ProduceId1");
 
                     b.ToTable("CardList");
                 });
@@ -181,14 +179,9 @@ namespace Kardex.API.Migrations
 
             modelBuilder.Entity("Kardex.API.Models.CardList", b =>
                 {
-                    b.HasOne("Kardex.API.Models.Panel", "Produce")
-                        .WithMany()
-                        .HasForeignKey("ProduceId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Kardex.API.Models.Produce")
                         .WithMany("Cardlists")
-                        .HasForeignKey("ProduceId1");
+                        .HasForeignKey("ProduceId");
                 });
 
             modelBuilder.Entity("Kardex.API.Models.Member", b =>
