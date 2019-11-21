@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Kardex.API.Interfaces.Services
 {
-    public interface IBaseServiceInterface<T> where T:class
+    public interface IBaseServiceInterface<TEntity> where TEntity:class
     {
-        Result<T> Insert(T entity);
-        Result <T> Update(int id, T entity);
-        Result<T> GetOne(int id);
-        Result<T> GetAll();
-        Result<bool> Delete(int id); 
+        Result<IEnumerable<TEntity>> GetAll();
+        Result<TEntity> GetOne(int id);
+        Result Insert(TEntity entity);
+        Result Update(int id, TEntity entity);
+        Result Delete(int id); 
     }
 }

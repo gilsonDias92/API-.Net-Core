@@ -15,6 +15,5 @@ namespace Kardex.API.DataTransferObjects
         public string Icon { get; set; }
         public ICollection<CardDTO> Cards { get; set; }
         public ICollection<PanelDTO> Panels { get; set; }
-
     }
 }

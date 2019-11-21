@@ -10,90 +10,105 @@ using AutoMapper;
 using Kardex.API.Models;
 using Kardex.API.Validators;
 using Kardex.API.DataTransferObjects;
-using Kardex.API.ExtensionMethods.User;
+using Kardex.API.ExtensionMethods.UserExtensionMethods;
 using Kardex.API.Contracts.Requests.Create;
 using Kardex.API.Services;
+using Kardex.API.Interfaces.Services;
+using FluentResults;
+using Kardex.API.Validators.Rules.User;
 
 namespace Kardex.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
-        private readonly UserServices _services;
+        private readonly IUserService _services;
 
-        public UsersController(UserServices services)
+        public UsersController(IUserService services)
         {
             _services = services;
         }
 
-        // GET: api/Users
         [HttpGet]
         public IActionResult GetUser()
         {
             var users = _services.GetAll();
+
+            if (users.IsFailed)
+                return BadRequest(users.Errors);
+
             return Ok(users);
         }
 
         // GET: api/Users/id
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id)
+        public IActionResult GetUser(int id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(_services.GetOne(id));
+            var result = _services.GetOne(id);
+
+            if (result.IsFailed)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok(result);
         }
 
         // PUT: api/Users/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, UserDTO userDTO)
+        public IActionResult PutUser(int id, UserDTO userContract)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            _services.Edit(id, userDTO);
-            return Ok();
+            var result = _services.Update(id, userContract);
+
+            if (result.IsFailed)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok(result);
         }
 
-        // POST: api/Users
         [EnableCors("MyPolicy")]
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody]UserCreateRequest userContract)
+        public IActionResult PostUser([FromBody]UserDTO user)
         {
-            //if (!ModelState.IsValid)
-            //    return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
-            //var _validator = new UserCreateRequestValidator(_context, userContract); 
+            var result = _services.Insert(user);
 
-            //if (!_validator.UserExists())
-            //    return BadRequest(new { errors = "Erro! Esse e-mail já foi cadastrado." });
+            if (result.IsFailed)
+            {
+                return BadRequest(result.Errors.ToList());
+            }
 
-
-            //// Convertendo o contrato para DTO
-            //var userDTO = userContract.ConvertContractToUserDTO();
-
-            //var user = _mapper.Map<UserDTO, User>(userDTO);
-
-            //_context.User.Add(user);
-            //await _context.SaveChangesAsync();
-
-            //userDTO.Id = user.Id;
-
-            //return CreatedAtAction("GetUser", new { id = user.Id }, user);
-            return Ok();
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Users/id
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public IActionResult DeleteUser(int id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            _services.Delete(id);
+            var result = _services.Delete(id);
 
-            return Ok();
+            if (result.IsSuccess)
+            {
+                return Ok(result.Successes.ToList());
+            }
+            else
+            {
+                return BadRequest(result.Errors.ToList());
+            }
         }
     }
 }

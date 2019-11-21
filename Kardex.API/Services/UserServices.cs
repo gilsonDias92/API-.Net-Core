@@ -1,6 +1,13 @@
 ﻿using AutoMapper;
+using FluentResults;
+using FluentValidation;
+using Kardex.API.Contracts.Requests.Create;
 using Kardex.API.DataTransferObjects;
+using Kardex.API.ExtensionMethods.UserExtensionMethods;
+using Kardex.API.Interfaces.Services;
 using Kardex.API.Models;
+using Kardex.API.Validators;
+using Kardex.API.Validators.Rules.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Kardex.API.Services
 {
-    public class UserServices
+    public class UserServices : IUserService
     {
         private readonly KardexContext _context;
         private readonly IMapper _mapper;
@@ -21,54 +28,99 @@ namespace Kardex.API.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<UserDTO> GetAll()
+        public Result<IEnumerable<UserDTO>> GetAll()
         {
-            var users = _context.User.ToList()
+            var users = _context.User
+                //.Include(u => u.Cards)
                 .Select(_mapper.Map<User, UserDTO>);
-            return users;
+
+            if (users == null)
+            {
+                Result error = Results.Fail("Erro! Não há usuários cadastrados.");
+            }
+            return Results.Ok(users);
         }
 
-        public async Task<UserDTO> GetOne(int id)
+        public Result<UserDTO> GetOne(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = _context.User.SingleOrDefault(u => u.Id == id);
 
-            // if (user == null)
-            //     return 
-
-            return _mapper.Map<UserDTO>(user);
+            if (user == null)
+            {
+                Result error = Results.Fail("Erro! Usuário inválido.");
+                return error;
+            }
+            var userDTO = _mapper.Map<User, UserDTO>(user);
+            return Results.Ok(userDTO);
         }
 
-        public async void Edit(int id, UserDTO user)
+        public Result Insert(UserDTO userDTO)
         {
-            var userInDb = _context.User.SingleOrDefault(u => u.Id == id);
+            var validationRules = new UserModelValidatior();
+            var validationResult = validationRules.Validate(userDTO);
+
+            if (!validationResult.IsValid)
+            {
+                string errors = null;
+
+                foreach (var failure in validationResult.Errors)
+                {
+                    errors += "Propriedade: " + failure.PropertyName + ". Erro: " +
+                        failure.ErrorMessage + " .";
+                }
+                return Results.Fail(errors);
+            }
+
+            var userValidator = new UserCreateValidator(_context, userDTO);
+            if (!userValidator.UserExists())
+            {
+                Result error = Results.Fail("Esse e-mail já foi cadastrado!");
+                return error.Errors.ToResult();
+            }
+            var user = _mapper.Map<UserDTO, User>(userDTO);
+
+
+            _context.User.Add(user);
+            _context.SaveChanges();
+            userDTO.Id = user.Id;
+
+            return Results.Ok(user.Id);
+        }
+
+        public Result Update(int id, UserDTO userDTO)
+        {
+            var userInDb = _context.User
+                .SingleOrDefault(u => u.Id == id);
 
             if (userInDb == null)
-                return;
-
-            _mapper.Map(user, userInDb);
-
-            try
             {
-                await _context.SaveChangesAsync();
+                Result error = Results.Fail("Usuário não encontrado!");
+                return error;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                    return;
-                else
-                    throw;
-            }
+
+            _mapper.Map(userDTO, userInDb);
+
+            var contextUpdated = _context.SaveChanges();
+
+            if (contextUpdated > 0)
+                return Results.Ok();
+            else
+                return Results.Fail("Ocorreu um erro na hora de salvar");
         }
 
-        public async void Delete(int id)
+        public Result Delete(int id)
         {
-            var userInDb = await _context.User.FindAsync(id);
+            var user = _context.User.SingleOrDefault(u => u.Id == id);
 
-            if (userInDb == null)
-                return;
+            if (!UserExists(user.Id))
+            {
+                return Results.Fail("Usuário não encontrado.");
+            }
 
-            _context.User.Remove(userInDb);
-            await _context.SaveChangesAsync();
+            _context.User.Remove(user);
+            _context.SaveChanges();
+
+            return Results.Ok();
         }
 
         private bool UserExists(int id)

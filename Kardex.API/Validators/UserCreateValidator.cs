@@ -1,4 +1,5 @@
 ﻿using Kardex.API.Contracts.Requests.Create;
+using Kardex.API.DataTransferObjects;
 using Kardex.API.Models;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Kardex.API.Validators
 {
-    public class UserCreateRequestValidator
+    public class UserCreateValidator
     {
         private readonly KardexContext _context;
-        private UserCreateRequest _user;
+        private UserDTO _user;
 
-        public UserCreateRequestValidator(KardexContext context, UserCreateRequest user)
+        public UserCreateValidator(KardexContext context, UserDTO user)
         {
             _context = context;
             _user = user;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Kardex.API.Contracts.Requests.Create;
 using Kardex.API.DataTransferObjects;
 using Kardex.API.Models;
 
@@ -10,6 +11,9 @@ namespace Kardex.API.Data
         {
             CreateMap<User, UserDTO>();
             CreateMap<UserDTO, User>().ForMember(u => u.Id, opt => opt.Ignore());
+
+            // realizando testes...
+
 
             CreateMap<Card, CardDTO>();
             CreateMap<CardDTO, Card>().ForMember(c => c.Id, opt => opt.Ignore());

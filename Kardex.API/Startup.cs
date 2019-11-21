@@ -19,6 +19,8 @@ using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using Kardex.API.DataTransferObjects;
 using FluentValidation.AspNetCore;
 using Newtonsoft.Json;
+using Kardex.API.Interfaces.Services;
+using Kardex.API.Services;
 
 namespace Kardex.API
 {
@@ -40,12 +42,15 @@ namespace Kardex.API
         {
             services.AddMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            services.AddScoped<IUserService, UserServices>();
 
             services.AddMvc()
                 .AddFluentValidation(fvc =>
                             fvc.RegisterValidatorsFromAssemblyContaining<Startup>());
 
-            services.AddMvc().AddJsonOptions(options => {
+            services.AddMvc().AddJsonOptions(options =>
+            {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
@@ -60,6 +65,7 @@ namespace Kardex.API
             {
                 mc.AddProfile(new MappingProfile());
             });
+
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
 
