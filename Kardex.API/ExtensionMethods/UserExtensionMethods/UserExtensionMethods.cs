@@ -1,26 +1,29 @@
 ﻿using Kardex.API.Contracts.Requests.Create;
 using Kardex.API.Contracts.Requests.Edit;
 using Kardex.API.Contracts.Requests.Update;
+using Kardex.API.DataTransferObjects;
 using Kardex.API.Models;
 
 namespace Kardex.API.ExtensionMethods.UserExtensionMethods
 {
     public static class UserExtensionMethods
     {
-        public static User ConvertCreateContractToUser(this UserCreateRequest contract)
+        public static UserDTO ConvertCreateContractToUser(this UserCreateRequest contract)
         {
-            var user = new User
+            var user = new UserDTO
             {
                 Name = contract.Name,
                 Email = contract.Email,
-                Password = contract.Password
+                Password = contract.Password,
+                Icon = contract.Icon
             };
+
             return user;
         }
 
-        public static User ConvertUpdateContractToUser(this UserUpdateRequest contract)
+        public static UserDTO ConvertUpdateContractToUser(this UserUpdateRequest contract)
         {
-            return new User();
+            return new UserDTO();
         }
     }
 }

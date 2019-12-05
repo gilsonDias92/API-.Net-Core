@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Kardex.API.Validators.Rules.User
 {
-    public class UserModelValidatior : AbstractValidator<UserDTO>
+    public class UserValidator : AbstractValidator<UserDTO>
     {
-        public UserModelValidatior()
+        public UserValidator()
         {
             Include(new UserNameValidationRules());
             Include(new UserEmailValidationRules());

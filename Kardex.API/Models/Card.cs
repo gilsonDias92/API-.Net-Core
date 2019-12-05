@@ -21,13 +21,25 @@ namespace Kardex.API.Models
         [MaxLength(200, ErrorMessage = "Máximo de {1} caracteres permitidos")]
         public string Content { get; set; }
         public string Lables { get; set; }
-        public bool? Visible { get; set; }
         public User User { get; set; }
         [ForeignKey("User")]
         public int UserId { get; set; }
         public CardList CardList { get; set; }
         [ForeignKey("Card")]
         public int CardListId { get; set; }
+
+        private bool? _visible = null;
+        public bool? Visible
+        {
+            get
+            {
+                return _visible.HasValue ? _visible.Value : true;
+            }
+            set
+            {
+                _visible = value;
+            }
+        }
 
         private DateTime? _addedDate = null;
         public DateTime DateAdded

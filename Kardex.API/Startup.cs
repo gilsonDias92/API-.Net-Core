@@ -44,6 +44,7 @@ namespace Kardex.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
             services.AddScoped<IUserService, UserServices>();
+            services.AddScoped<ICardService, CardServices>();
 
             services.AddMvc()
                 .AddFluentValidation(fvc =>

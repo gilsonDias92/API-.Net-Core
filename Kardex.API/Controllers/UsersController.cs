@@ -30,6 +30,7 @@ namespace Kardex.API.Controllers
             _services = services;
         }
 
+
         [HttpGet]
         public IActionResult GetUser()
         {
@@ -41,7 +42,7 @@ namespace Kardex.API.Controllers
             return Ok(users);
         }
 
-        // GET: api/Users/id
+
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
@@ -51,47 +52,43 @@ namespace Kardex.API.Controllers
             var result = _services.GetOne(id);
 
             if (result.IsFailed)
-            {
                 return BadRequest(result.Errors);
-            }
 
             return Ok(result);
         }
 
-        // PUT: api/Users/id
+
         [HttpPut("{id}")]
-        public IActionResult PutUser(int id, UserDTO userContract)
+        public IActionResult PutUser(int id, UserCreateRequest userContract)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = _services.Update(id, userContract);
+            var user = userContract.ConvertCreateContractToUser();
+
+            var result = _services.Update(id, user);
 
             if (result.IsFailed)
-            {
                 return BadRequest(result.Errors);
-            }
             return Ok(result);
         }
+
 
         [EnableCors("MyPolicy")]
         [HttpPost]
         public IActionResult PostUser([FromBody]UserDTO user)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest();
-            }
 
             var result = _services.Insert(user);
 
             if (result.IsFailed)
-            {
                 return BadRequest(result.Errors.ToList());
-            }
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
+
 
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
@@ -102,13 +99,9 @@ namespace Kardex.API.Controllers
             var result = _services.Delete(id);
 
             if (result.IsSuccess)
-            {
-                return Ok(result.Successes.ToList());
-            }
+                return Ok(result);
             else
-            {
                 return BadRequest(result.Errors.ToList());
-            }
         }
     }
 }

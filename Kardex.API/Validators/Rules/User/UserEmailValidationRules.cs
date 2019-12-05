@@ -10,9 +10,7 @@ namespace Kardex.API.Validators.Rules.User
             RuleFor(user => user.Email).NotEmpty().
                 WithMessage("O campo e-mail não pode ser vazio. -FLUENT");
 
-            RuleFor(user => user.Email)
-                .EmailAddress()
-                .Matches(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")
+            RuleFor(user => user.Email).EmailAddress()
                 .WithMessage("Formato de e-mail inválido. -FLUENT");
         }
     }

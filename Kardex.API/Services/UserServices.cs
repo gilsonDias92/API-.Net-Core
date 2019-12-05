@@ -28,10 +28,12 @@ namespace Kardex.API.Services
             _mapper = mapper;
         }
 
+
+
         public Result<IEnumerable<UserDTO>> GetAll()
         {
             var users = _context.User
-                //.Include(u => u.Cards)
+                .Include(user => user.Panels)
                 .Select(_mapper.Map<User, UserDTO>);
 
             if (users == null)
@@ -40,6 +42,8 @@ namespace Kardex.API.Services
             }
             return Results.Ok(users);
         }
+
+
 
         public Result<UserDTO> GetOne(int id)
         {
@@ -54,9 +58,10 @@ namespace Kardex.API.Services
             return Results.Ok(userDTO);
         }
 
+
         public Result Insert(UserDTO userDTO)
         {
-            var validationRules = new UserModelValidatior();
+            var validationRules = new UserValidator();
             var validationResult = validationRules.Validate(userDTO);
 
             if (!validationResult.IsValid)
@@ -79,7 +84,6 @@ namespace Kardex.API.Services
             }
             var user = _mapper.Map<UserDTO, User>(userDTO);
 
-
             _context.User.Add(user);
             _context.SaveChanges();
             userDTO.Id = user.Id;
@@ -87,10 +91,12 @@ namespace Kardex.API.Services
             return Results.Ok(user.Id);
         }
 
+
+
         public Result Update(int id, UserDTO userDTO)
         {
             var userInDb = _context.User
-                .SingleOrDefault(u => u.Id == id);
+                .Find(id);
 
             if (userInDb == null)
             {
@@ -107,6 +113,8 @@ namespace Kardex.API.Services
             else
                 return Results.Fail("Ocorreu um erro na hora de salvar");
         }
+
+
 
         public Result Delete(int id)
         {

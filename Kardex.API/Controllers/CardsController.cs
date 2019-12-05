@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kardex.API.ExtensionMethods.CardExtensionMethods;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Kardex.API.Models;
 using AutoMapper;
 using Kardex.API.DataTransferObjects;
+using Kardex.API.Interfaces.Services;
+using Kardex.API.Contracts.Requests.Create;
 
 namespace Kardex.API.Controllers
 {
@@ -15,118 +18,88 @@ namespace Kardex.API.Controllers
     [ApiController]
     public class CardsController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        private readonly KardexContext _context;
+        private readonly ICardService _services;
 
-        public CardsController(KardexContext context, IMapper mapper)
+        public CardsController(ICardService services)
         {
-            _context = context;
-            _mapper = mapper;
+            _services = services;
         }
 
-        // GET: api/Cards
         [HttpGet]
         public IActionResult GetCard()
         {
-            var cards = _context.Card
-                .Select(_mapper.Map<Card, CardDTO>);
+            var cards = _services.GetAll();
+
+            if (cards.IsFailed)
+                return BadRequest(cards.Errors);
 
             return Ok(cards);
         }
 
-        // GET: api/Cards/5
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCard([FromRoute] int id)
+        public IActionResult GetCard(int id)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            var card = await _context.Card.FindAsync(id);
+            var result = _services.GetOne(id);
 
-            if (card == null)
-            {
-                return NotFound();
-            }
+            if (result.IsFailed)
+                return BadRequest(result.Errors);
 
-            return Ok(card);
+            return Ok(result);
         }
 
-        // PUT: api/Cards/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCard([FromRoute] int id, [FromBody] Card card)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            if (id != card.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(card).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CardExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Cards
         [HttpPost]
-        public async Task<IActionResult> PostCard([FromBody] Card card)
+        public IActionResult PostCard([FromBody] CardDTO card)
         {
             if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+                return BadRequest();
 
-            _context.Card.Add(card);
-            await _context.SaveChangesAsync();
+            var result = _services.Insert(card);
 
-            return CreatedAtAction("GetCard", new { id = card.Id }, card);
+            if (result.IsFailed)
+                return BadRequest(result.Errors.ToList());
+
+            return CreatedAtAction("GetUser", new { id = card.Id }, card);
         }
 
-        // DELETE: api/Cards/5
+
+        [HttpPut("{id}")]
+        public IActionResult PutCard(int id, CardCreateRequest cardContract)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var cardDTO = cardContract.ConvertCreateContactToCardDTO();
+
+            if (id != cardDTO.Id)
+                return BadRequest();
+
+            var result = _services.Update(id, cardDTO);
+
+            if (result.IsFailed)
+                return BadRequest(result.Errors);
+
+            return Ok(result);
+
+        }
+
+
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCard([FromRoute] int id)
+        public IActionResult DeleteCard(int id)
         {
             if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+                return BadRequest();
 
-            var card = await _context.Card.FindAsync(id);
-            if (card == null)
-            {
-                return NotFound();
-            }
+            var result = _services.Delete(id);
 
-            _context.Card.Remove(card);
-            await _context.SaveChangesAsync();
+            if (result.IsFailed)
+                return BadRequest(result.Errors.ToString());
 
-            return Ok(card);
-        }
-
-        private bool CardExists(int id)
-        {
-            return _context.Card.Any(e => e.Id == id);
+            return Ok(result);
         }
     }
 }
