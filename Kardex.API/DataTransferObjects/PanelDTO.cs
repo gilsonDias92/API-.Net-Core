@@ -10,6 +10,5 @@ namespace Kardex.API.DataTransferObjects
         public int Id { get; set; }
         public BoardDTO Board { get; set; }
         public int BoardId { get; set; }
-        public ICollection<ProduceDTO> Produces { get; set; }
     }
 }

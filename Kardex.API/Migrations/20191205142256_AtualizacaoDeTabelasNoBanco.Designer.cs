@@ -3,14 +3,16 @@ using System;
 using Kardex.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kardex.API.Migrations
 {
     [DbContext(typeof(KardexContext))]
-    partial class KardexContextModelSnapshot : ModelSnapshot
+    [Migration("20191205142256_AtualizacaoDeTabelasNoBanco")]
+    partial class AtualizacaoDeTabelasNoBanco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

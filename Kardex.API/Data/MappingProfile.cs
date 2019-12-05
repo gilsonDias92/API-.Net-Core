@@ -21,9 +21,6 @@ namespace Kardex.API.Data
             CreateMap<CardList, CardListDTO>();
             CreateMap<CardListDTO, CardList>().ForMember(cl => cl.Id, opt => opt.Ignore());
 
-            CreateMap<Produce, ProduceDTO>();
-            CreateMap<ProduceDTO, Produce>().ForMember(p => p.Id, opt => opt.Ignore());
-
             CreateMap<Board, BoardDTO>();
             CreateMap<BoardDTO, Board>().ForMember(b => b.Id, opt => opt.Ignore());
 

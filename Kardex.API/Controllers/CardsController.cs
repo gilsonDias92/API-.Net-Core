@@ -75,9 +75,6 @@ namespace Kardex.API.Controllers
 
             var cardDTO = cardContract.ConvertCreateContactToCardDTO();
 
-            if (id != cardDTO.Id)
-                return BadRequest();
-
             var result = _services.Update(id, cardDTO);
 
             if (result.IsFailed)
